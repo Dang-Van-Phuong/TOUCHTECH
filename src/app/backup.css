@@ -1340,14 +1340,6 @@ body{
   margin-top: 14px;
 }
 /* ===== One-page scroll container ===== */
-.tt-onepage{
-  height: 100vh;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-snap-stop: always;
-  scroll-behavior: smooth;
-}
-
 /* mỗi section chiếm gần full màn hình */
 .tt-onepage section[data-snap]{
   min-height: 100vh;
@@ -1474,4 +1466,93 @@ html, body { height: 100%; overflow: hidden; } /* tắt scrollbar ngoài */
   top:0;
   width:14px;
   height:100%;
+}
+/* ===== FIX: scrollbar full height như Chrome ===== */
+.tt-onepage{
+  position: fixed;
+  inset: 0;                 /* phủ full viewport -> scrollbar chạy từ đỉnh xuống */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scroll-snap-type: y mandatory;
+  scroll-snap-stop: always;
+  scroll-behavior: smooth;
+
+  /* để khi snap/scroll không bị header che */
+  scroll-padding-top: var(--tt-header-h);
+}
+
+/* mỗi section */
+.tt-onepage section[data-snap]{
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-margin-top: var(--tt-header-h);
+}
+
+/* giữ header nổi lên trên */
+.tt-topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.navbar{
+  position: sticky;
+  top: 40px;     /* chỉnh theo height topbar thật */
+  z-index: 9998;
+  background: #fff;
+}
+/* =========================
+   FORCE SCROLLBAR = WINDOW
+   (Paste at VERY BOTTOM)
+========================= */
+
+/* 1) Window scroll only */
+html, body{
+  height: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* 2) Kill any internal scroll containers */
+.tt-onepage,
+.tt-snap{
+  position: static !important;
+  inset: auto !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+}
+
+/* 3) Header fixed overlay */
+.tt-topbar{
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999 !important;
+}
+
+.navbar{
+  position: fixed !important;
+  top: 40px !important;           /* chỉnh lại nếu topbar cao khác */
+  left: 0;
+  right: 0;
+  z-index: 9998 !important;
+  background: #fff !important;
+}
+
+/* 4) Push content down so it isn't hidden behind header */
+.tt-onepage{
+  padding-top: var(--tt-header-h) !important;
+}
+
+/* (Optional) snap on window, nếu chị vẫn muốn kiểu "1 wheel = 1 section" */
+html{
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.tt-onepage section[data-snap]{
+  scroll-snap-align: start;
+  scroll-margin-top: var(--tt-header-h);
 }
