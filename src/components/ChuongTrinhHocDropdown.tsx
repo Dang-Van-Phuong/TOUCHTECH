@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 export default function ChuongTrinhHocDropdown() {
   return (
@@ -15,21 +16,19 @@ export default function ChuongTrinhHocDropdown() {
         Chương trình học
       </a>
 
-      {/* Dropdown cấp 1 */}
       <ul className="dropdown-menu tt-program-menu">
         <li>
-          <a className="dropdown-item tt-program-item" href="/chuong-trinh/tin-hoc-van-phong">
+          <Link className="dropdown-item tt-program-item" href="/chuong-trinh/tin-hoc-van-phong">
             Luyện thi tin học văn phòng (MOS)
-          </a>
+          </Link>
         </li>
 
         <li>
-          <a className="dropdown-item tt-program-item" href="/chuong-trinh/robotics">
+          <Link className="dropdown-item tt-program-item" href="/chuong-trinh/robotics">
             Chế tạo &amp; lắp ráp Robotics
-          </a>
+          </Link>
         </li>
 
-        {/* ✅ Item có submenu */}
         <li className="dropend tt-submenu">
           <a
             className="dropdown-item tt-program-item tt-submenu-trigger"
@@ -41,24 +40,23 @@ export default function ChuongTrinhHocDropdown() {
             <span className="tt-submenu-caret" aria-hidden="true">›</span>
           </a>
 
-          {/* Dropdown cấp 2 (submenu) */}
           <ul className="dropdown-menu tt-program-submenu">
-        <li>
-          <a className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/scratch">
-            Chương trình học Scratch
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/python">
-            Chương trình học Python
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/cpp">
-            Chương trình học C++
-          </a>
-        </li>
-      </ul>
+            <li>
+              <Link className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/scratch">
+                Chương trình học Scratch
+              </Link>
+            </li>
+            <li>
+              <Link className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/python">
+                Chương trình học Python
+              </Link>
+            </li>
+            <li>
+              <Link className="dropdown-item tt-program-item" href="/chuong-trinh/cuoc-thi-lap-trinh/cpp">
+                Chương trình học C++
+              </Link>
+            </li>
+          </ul>
         </li>
       </ul>
     </li>
